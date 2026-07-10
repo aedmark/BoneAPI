@@ -1,6 +1,6 @@
 # Adding New Payloads to the x402 Gateway
 
-Tis system uses FastAPI's dependency injection architecture, expanding the digital tollbooth is incredibly easy. We simply snap the existing lock onto new doors.
+This system uses FastAPI's dependency injection architecture, expanding the digital tollbooth is incredibly easy. We simply snap the existing lock onto new doors.
 
 Here is the step-by-step process for adding future payloads.
 
