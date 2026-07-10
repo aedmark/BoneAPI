@@ -5,13 +5,15 @@ import shutil
 
 # Official x402 Python SDK Imports
 from x402 import x402ResourceServerSync, ResourceConfig
-from x402.http import HTTPFacilitatorClientSync
+from x402.http import HTTPFacilitatorClientSync, FacilitatorConfig
 from x402.mechanisms.evm.exact import ExactEvmServerScheme
 
 app = FastAPI()
 
 # 1. Initialize Facilitator & Server (The Official Approach)
-facilitator = HTTPFacilitatorClientSync(url="https://x402.org/facilitator")
+# We now wrap the URL in the FacilitatorConfig object to satisfy the class requirement
+facilitator_config = FacilitatorConfig(url="https://x402.org/facilitator")
+facilitator = HTTPFacilitatorClientSync(facilitator_config)
 server = x402ResourceServerSync(facilitator)
 
 # 2. Register your EVM Network Scheme
