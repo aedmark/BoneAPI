@@ -8,7 +8,7 @@ app = FastAPI()
 
 # THE LEDGER CONFIGURATION
 # Replace with your actual RPC URL and Ethereum Wallet Address
-RPC_URL = "https://your-rpc-endpoint-url.com"
+RPC_URL = "https://ethereum-mainnet.core.chainstack.com/414d92e307caf4c679c51bc50e78cb14"
 web3 = Web3(Web3.HTTPProvider(RPC_URL))
 YOUR_WALLET = "0x98C7A4621eE5e590bc3BC9AB7ED842DC534022e5"
 
