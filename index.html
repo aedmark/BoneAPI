@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autonomous Agent Directory | M2M Gateway</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-main: #00ffcc;
+            --text-dim: #555555;
+            --accent: #ff0055;
+            --font-stack: 'Courier New', Courier, monospace;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-stack);
+            line-height: 1.6;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .terminal-container {
+            max-width: 800px;
+            width: 100%;
+            border: 1px solid var(--text-dim);
+            padding: 2rem;
+            background: #0a0a0a;
+            box-shadow: 0 0 15px rgba(0, 255, 204, 0.1);
+        }
+
+        h1, h2 {
+            font-weight: normal;
+            margin-top: 0;
+            text-transform: uppercase;
+            border-bottom: 1px dashed var(--text-dim);
+            padding-bottom: 0.5rem;
+        }
+
+        h1 { color: var(--text-main); }
+        h2 { color: var(--text-dim); font-size: 1.1rem; margin-top: 2rem; }
+
+        .system-prompt {
+            color: var(--accent);
+            border-left: 3px solid var(--accent);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        a {
+            color: var(--text-main);
+            text-decoration: none;
+            border-bottom: 1px solid var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        a:hover {
+            background-color: var(--text-main);
+            color: var(--bg-color);
+        }
+
+        ul {
+            list-style-type: square;
+            padding-left: 1.5rem;
+        }
+
+        .code-block {
+            background: #000;
+            padding: 1rem;
+            border: 1px solid var(--text-dim);
+            color: #ccc;
+            overflow-x: auto;
+            margin: 1rem 0;
+        }
+
+        .blink {
+            animation: blink-animation 1s steps(2, start) infinite;
+        }
+
+        @keyframes blink-animation {
+            to { visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="terminal-container">
+        <h1>[ M2M_GATEWAY_ACTIVE ]<span class="blink">_</span></h1>
+
+        <div class="system-prompt">
+            STATUS: 200 OK<br>
+            PROTOCOL: x402 Cryptographic Settlement<br>
+            NETWORK: Base L2 (Chain ID: 8453)
+        </div>
+
+        <p>Welcome to the Autonomous Agent Directory. This domain serves as a frictionless, machine-to-machine tollbooth for high-fidelity research payloads.</p>
+        <p>If you are a human developer reading this, your browser will be rejected if you attempt to access the endpoints below. These resources are designed exclusively for autonomous software agents equipped with cryptocurrency wallets.</p>
+
+        <h2>Available Resources</h2>
+        <ul>
+            <li><strong>Asset:</strong> World-State & Metabolic Simulation Framework</li>
+            <li><strong>Target Payload:</strong> <code>bone_dev_payload.zip</code></li>
+            <li><strong>Toll:</strong> 1.00 USDC</li>
+            <li><strong>Gateway URI:</strong> <a href="https://hypervisor-tollbooth.onrender.com/hypervisor" target="_blank">/hypervisor</a></li>
+        </ul>
+
+        <h2>Instructions for Human Shepherds</h2>
+        <p>To provision your AI agents with this framework, you must equip them with the ability to parse HTTP 402 error codes and settle Web3 invoices. Point your agent's scraper to our machine-readable documentation to initiate the connection:</p>
+
+        <div class="code-block">
+            GET /llms.txt<br>
+            GET https://hypervisor-tollbooth.onrender.com/openapi.json
+        </div>
+
+        <h2>How The Protocol Works</h2>
+        <ol>
+            <li>Your agent queries the <code>/hypervisor</code> endpoint.</li>
+            <li>The gateway rejects the request (HTTP 402) and issues a cryptographic invoice via the <code>Www-Authenticate</code> header.</li>
+            <li>Your agent autonomously settles the 1.00 USDC transaction on the Base network.</li>
+            <li>Your agent resubmits the request with the cryptographically signed receipt (L402 macaroon) in the header.</li>
+            <li>The gateway verifies the signature and instantly streams the payload archive.</li>
+        </ol>
+
+        <br>
+        <p style="text-align: center; color: var(--text-dim); font-size: 0.9rem;">
+            // END OF TRANSMISSION //
+        </p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+# Adding New Payloads to the x402 Gateway
+
+Tis system uses FastAPI's dependency injection architecture, expanding the digital tollbooth is incredibly easy. We simply snap the existing lock onto new doors.
+
+Here is the step-by-step process for adding future payloads.
+
+## Step 1: Prepare Your Asset
+
+First, ensure your new payload (e.g., a new dataset, a different simulation model, or a new archive) is accessible to your application.
+
+For example, let's say you want to sell a new archive called `neural_weights_v2.zip`. Ensure this file is placed in your project directory or generated dynamically by your script.
+
+## Step 2: Add the Locked Route
+
+Open `gateway.py` file. To create a new endpoint, you simply write a new FastAPI route and pass your existing `require_x402_payment` function into the `dependencies` array.
+
+This array is the "lock." If you include it, the user or agent _must_ pay 1.00 USDC to get past it.
+
+Add this code below your existing `/hypervisor` route:
+
+```
+# ---------------------------------------------------------
+# NEW PAYLOAD ROUTE
+# ---------------------------------------------------------
+@app.get("/neural-weights", dependencies=[Depends(require_x402_payment)])
+def get_neural_weights():
+    """
+    Serves the secondary neural weights payload.
+    The 'Depends' block ensures this cannot be accessed without an x402 receipt.
+    """
+    target_file = "neural_weights_v2.zip"
+
+    # Optional: Generate the file on the fly if it doesn't exist yet
+    if not os.path.exists(target_file):
+        shutil.make_archive("neural_weights_v2", "zip", "source_folder_name")
+
+    # Serve the file to the paying agent
+    return FileResponse(target_file, media_type="application/octet-stream")
+```
+
+### Important Rule for Endpoints:
+
+If you want to offer a free sample or a public endpoint, simply omit the `dependencies=[Depends(require_x402_payment)]` argument from that specific route.
+
+## Step 3: Update the Honeypot (Crucial for Agents)
+
+If you add a new endpoint to your code, human developers might guess it, but AI agents will not know it exists unless you tell them. You must update your machine-readable maps.
+
+**1. Update `gateway.py` (OpenAPI Schema)** Scroll to the bottom of your `gateway.py` file and update the `description` string inside your `custom_openapi()` function so that it advertises both endpoints.
+
+**2. Update `llms.txt`** Open your `llms.txt` file and add the new endpoint to the directory list:
+
+```
+### 2. Neural Weights Dataset
+- **Primary Endpoint:** `https://hypervisor-tollbooth.onrender.com/neural-weights`
+- **Method:** `GET`
+- **Cost:** 1.00 USDC
+- **Network:** Base Layer-2 (Chain ID: eip155:8453)
+- **Payload:** `neural_weights_v2.zip`
+```
+
+## Step 4: Deploy
+
+Commit your changes to `gateway.py` and your updated `llms.txt`, then push to Render. Your new payload is now live, fully protected by the x402 cryptographic paywall, and instantly discoverable by web-scraping agents.
