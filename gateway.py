@@ -38,6 +38,13 @@ def read_root():
         "message": "Hypervisor Tollbooth is active. Payment required for /hypervisor access."
     }
 
+@app.get("/llms.txt")
+def serve_llms_txt():
+    """
+    Serves the agent-optimized markdown directory.
+    """
+    return FileResponse("llms.txt", media_type="text/plain")
+
 @app.get("/hypervisor", dependencies=[Depends(require_x402_payment)])
 def get_hypervisor():
     archive_name = "bone_payload"
