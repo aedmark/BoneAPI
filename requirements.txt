@@ -1,3 +1,3 @@
 fastapi
 uvicorn
-x402-python
+x402
