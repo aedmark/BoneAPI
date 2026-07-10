@@ -40,9 +40,9 @@ def read_root():
 
 @app.get("/hypervisor", dependencies=[Depends(require_x402_payment)])
 def get_hypervisor():
-    archive_name = "bone_dev_payload"
+    archive_name = "bone_payload"
     if not os.path.exists(f"{archive_name}.zip"):
-        shutil.make_archive(archive_name, "zip", "bone_dev_2026")
+        shutil.make_archive(archive_name, "zip", "bone")
     return FileResponse(f"{archive_name}.zip", media_type="application/octet-stream")
 
 # 5. THE HONEYPOT (Agent-Optimized Schema)
