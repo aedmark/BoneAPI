@@ -40,6 +40,14 @@ def require_x402_payment(request: Request):
     # In a fully fleshed-out environment, you would pass the header to the server here:
     # server.verify(auth_header)
 
+# A public root endpoint for health checks and browsers
+@app.get("/")
+def read_root():
+    return {
+        "status": "online", 
+        "message": "Hypervisor Tollbooth is active. Payment required for /hypervisor access."
+    }
+
 # 4. The Single Endpoint
 # The 'Depends' block ensures this code ONLY runs if the agent passed the payment gate above
 @app.get("/hypervisor", dependencies=[Depends(require_x402_payment)])
